@@ -1,6 +1,13 @@
 # Philosophers
+[Задание](https://cdn.intra.42.fr/pdf/pdf/47291/en.subject.pdf)
+
+[Стандартный чеклист](https://github.com/mharriso/school21-checklists/blob/master/ng_4_philosophers.pdf)
 ## Mandatory:
 ### Makefile:
+1. Проверить make, make clean, make fclean, make re.
+2. Проверить relink после изменения .c, .h, Makefile
+3. Проверить наличие флагов -Wall -Wextra -Werror
+
 Не забываем проверить *-lpthread*
 ### Input:
 1. Без аргументов
@@ -57,7 +64,7 @@ if (pthread_create(&thread, 0, start_thread, (void *)))
 
 ### Leaks:
 #### General
-1. Очитка выделенной памяти (не забываем проверить все варианты ввода)
+1. Очистка выделенной памяти (не забываем проверить все варианты ввода)
 2. Закрытие всех *threads* </br>
 `phread_join(thread, NULL);`
 3. Уничтожение всех используемых *mutex* </br>
