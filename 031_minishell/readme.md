@@ -45,11 +45,51 @@ a2 -n -nbash>
 
 #### Simple quotes
 
-#### env
+#### env, export, unset
+- check if the `env` shows you the current environment variables
+- `export` environment variables, create new ones or replace old ones
+- `unset` environment variables, remove them
 
-#### export
+`env` должен показать переменные среды, `export` экспортирует переменные, `unset` удаляет.
 
-#### unset
+Экспортируем след. переменные, смотрим на вывод ошибки о неправильном идентификаторе. 
+```
+export X1 X2=22 _X3 _X4=44 5 X6=66 7=77 X7 X8=88 X##=99 =
+
+bash: export: `5': not a valid identifier
+bash: export: `7=77': not a valid identifier
+bash: export: `X##=99': not a valid identifier
+bash: export: `=': not a valid identifier
+```
+Проверяем *$?* должен быть *1*. После этого запускаем `export`. Должны появится новые переменные. Внимание на: сортировку по алфавиту, значения должны быть в *"*, пустые должны быть показаны. </br>
+В `env` должны отображаться только переменные со значением. Порядок ???
+```
+export
+...
+declare -x X1
+declare -x X2="22"
+declare -x X6="66"
+declare -x X7
+declare -x X8="88"
+declare -x _X3
+declare -x _X4="44"
+
+env
+...
+X8=88
+X2=22
+_X4=44
+X6=66
+```
+Теперь удалим переменные командой `unset`
+
+```
+unset X1 X2 3=33 _X4 X7 X&& =
+bash: unset: `3=33': not a valid identifier
+```
+Проверяем *$?* должен быть *1*. После этого запускаем `export`. Переменные должны быть удалены. Сообщение об ошибке должно быть одно, но удалиться должны все корректно написанные. 
+
+
 
 #### cd
 
