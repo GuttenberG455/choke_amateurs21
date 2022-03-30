@@ -125,6 +125,17 @@ bash> pwd
 
 #### Go crazy and history
 
+- heredoc, redirects, interactive mode
+```
+bash> cat -e << "" >> a
+> first
+> second
+> // Ctrl + D 
+> bash> cat a
+first$
+second$
+```
+
 #### Enviroment Variables
 
 #### Miscellaneous
