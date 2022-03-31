@@ -25,14 +25,14 @@
 - execute the echo command `echo` with or without arguments or *-n*
 Параметр *-n* должен не выводить символ новой строки
 ```
-bash> echo AA
+bash-3.2$ echo AA
 AA
-bash> echo -n AB
-ABbash>
-bash> echo -nnnnnnnnnnnn a1
-a1bash> echo -n -n -n -n  a2
-a2bash> echo -n -n a2 -n -n
-a2 -n -nbash>
+bash-3.2$ echo -n AB
+ABbash-3.2$
+bash-3.2$ echo -nnnnnnnnnnnn a1
+a1bash-3.2$ echo -n -n -n -n  a2
+a2bash-3.2$ echo -n -n a2 -n -n
+a2 -n -nbash-3.2$
 ```
 
 #### exit
@@ -110,9 +110,9 @@ cd \<local_directory> | перемещение в директорию по от
 
 Можно проверить с переменной среды:
 ```
-bash> export CHEK=/usr/bin
-bash> cd $CHEK
-bash> pwd
+bash-3.2$ export CHEK=/usr/bin
+bash-3.2$ cd $CHEK
+bash-3.2$ pwd
 /usr/bin
 ```
 #### pwd
@@ -125,16 +125,39 @@ bash> pwd
 
 #### Go crazy and history
 
+- special redirects for file descriptors
+```
+bash-3.2$ cat <file_to_cat> <non-existent_file> 1>stdout.txt 2>stderr.txt
+bash-3.2$ cat stdout.txt
+file_content%                                                                                      
+bash-3.2$ cat stderr.txt
+cat: <non-existent_file>: No such file or directory
+bash-3.2$ cat <file_to_cat> <non-existent_file> 8>3 2>4
+file_content%
+bash-3.2$ cat <file_to_cat> <non-existent_file> 1>3 9>4
+cat: <non-existent_file>: No such file or directory
+```
 - heredoc, redirects, interactive mode
 ```
-bash> cat -e << "" >> a
+bash-3.2$ cat -e << "" >> a
 > first
 > second
 > // Ctrl + D 
-> bash> cat a
+> bash-3.2$ cat a
 first$
 second$
 ```
+- heredoc
+```
+bash-3.2$ cat <<$USER
+> qq
+> <user_name>
+> $USER
+qq
+<user_name>
+```
+heredoc закроется только после написания слова после << несмотря на $
+
 
 #### Enviroment Variables
 
@@ -159,11 +182,11 @@ Same as Mandatory
 #### And, Or
 - Use &&, || and parenthesis() with commands and check if it works as bash.
 ```
-bash> echo 1 && echo 2 || echo 3 && echo 4
+bash-3.2$ echo 1 && echo 2 || echo 3 && echo 4
 1
 2
 4
-bash> echo 1 && echo 2 || (echo 3 && echo 4)
+bash-3.2$ echo 1 && echo 2 || (echo 3 && echo 4)
 1
 2
 ```
